@@ -6,6 +6,8 @@ This is essentially high level API around `subprocess`.
 import logging
 import subprocess
 
+import kss.util.contract as contract
+
 
 def run(command: str, directory: str = None):
     """Run a command.
@@ -19,11 +21,13 @@ def run(command: str, directory: str = None):
                   specified, the command will be run in the current directory.
 
     Raises:
+       ValueError: if the command is empty
        FileNotFoundError: if a non-existant directory is specified
        subprocess.CalledProcessError: if there is a problem running the command.
 
     If the directory is not specified, then it will run in the current directory.
     """
+    contract.parameters(lambda: bool(command))
     logging.debug("Running command: %s", command)
     subprocess.run("%s" % command, shell=True, check=True, cwd=directory)
 
@@ -40,11 +44,13 @@ def get_run(command: str, directory: str = None) -> str:
                   specified, the command will be run in the current directory.
 
     Raises:
+       ValueError: if the command is empty
        FileNotFoundError: if a non-existant directory is specified
        subprocess.CalledProcessError: if there is a problem running the command.
 
     If the directory is not specified, then it will run in the current directory.
     """
+    contract.parameters(lambda: bool(command))
     logging.debug("Running command: %s", command)
     res = subprocess.run("%s" % command, shell=True, check=True, cwd=directory,
                          stdout=subprocess.PIPE)
@@ -67,6 +73,7 @@ def process(command: str, directory: str = None, as_string: bool = True):
                   each line will be passed as binary data.
 
     Raises:
+       ValueError: if the command is empty
        FileNotFoundError: if a non-existant directory is specified
        subprocess.CalledProcessError: if there is a problem running the command
 
@@ -76,6 +83,7 @@ def process(command: str, directory: str = None, as_string: bool = True):
 
     If the directory is not specified, then it will run in the current directory.
     """
+    contract.parameters(lambda: bool(command))
     logging.debug("Processing command: %s", command)
     with subprocess.Popen("%s" % command,
                           shell=True,

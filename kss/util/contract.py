@@ -58,7 +58,7 @@ def preconditions(*exprs):
         exprs : lambdas or functions that return a boolean value
 
     Raises:
-        ContractError: if one of the expressions returns False
+        kss.util.contract.ContractError: if one of the expressions returns False
     """
     _conditions('precondition', *exprs)
 
@@ -72,6 +72,6 @@ def postconditions(*exprs):
         exprs : lambdas or functions that return a boolean value
 
     Raises:
-        ContractError: if one of the expressions returns False
+        kss.util.contract.ContractError: if one of the expressions returns False
     """
     _conditions('postcondition', *exprs)

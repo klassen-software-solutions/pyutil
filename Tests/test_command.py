@@ -13,6 +13,10 @@ class CommandTestCase(unittest.TestCase):
             command.run("no-such-command")
         with self.assertRaises(FileNotFoundError):
             command.run("pwd", directory="/no/such/directory")
+        with self.assertRaises(ValueError):
+            command.run(None)
+        with self.assertRaises(ValueError):
+            command.run("")
 
     def test_get_run(self):
         self.assertEqual(command.get_run("echo 'hello world'"), "hello world")
@@ -22,6 +26,10 @@ class CommandTestCase(unittest.TestCase):
             command.get_run("no-such-command")
         with self.assertRaises(FileNotFoundError):
             command.get_run("pwd", directory="/no/such/directory")
+        with self.assertRaises(ValueError):
+            command.get_run(None)
+        with self.assertRaises(ValueError):
+            command.get_run("")
 
     def test_process(self):
         line_count = 0
@@ -47,4 +55,12 @@ class CommandTestCase(unittest.TestCase):
 
         with self.assertRaises(FileNotFoundError):
             for line in command.process("ls -l", directory="/no/such/directory"):
+                self.fail("Should never see this: %s" % line)
+
+        with self.assertRaises(ValueError):
+            for line in command.process(None):
+                self.fail("Should never see this: %s" % line)
+
+        with self.assertRaises(ValueError):
+            for line in command.process(""):
                 self.fail("Should never see this: %s" % line)
