@@ -1,0 +1,6 @@
+*.egg-info
+*.bak
+__pycache__
+dist
+REVISION
+
