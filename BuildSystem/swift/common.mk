@@ -1,4 +1,4 @@
-.PHONY: prep build check analyze
+.PHONY: clean prep build check analyze
 
 build:
 	echo TODO: build the package
@@ -15,3 +15,6 @@ check: build
 
 analyze:
 	echo TODO: run analyze
+
+clean:
+	rm -rf *~

@@ -63,9 +63,9 @@ fi
 
 # Download and extract the new version.
 
-filename=$(basename $url)
-curl -L $url > $filename
-unzip $filename
+filename=$(basename "$url")
+curl -L "$url" > "$filename"
+unzip "$filename"
 directory="BuildSystem-${branch//\//-}"
 if [ ! -d "$directory/BuildSystem" ]; then
     echo "Could not find BuildSystem within directory $directory"
