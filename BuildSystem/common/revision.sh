@@ -4,7 +4,7 @@ _format_for_python()
 {
     # shellcheck disable=SC2001
     #   Justification: Parameter expansion cannot handle the search and replace we require.
-    echo "$1" | sed 's/-\([0-9]*\)-.*/.dev\1/'
+    echo "$1" | sed 's/M$/.dev/' | sed 's/-\([0-9]*\)-.*/.dev\1/'
 }
 
 # Determine the version format
